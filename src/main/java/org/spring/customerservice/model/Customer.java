@@ -1,6 +1,6 @@
 package org.spring.customerservice.model;
 
-import jakarta.annotation.Nullable;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,6 @@
 package org.spring.customerservice.service;
 
 import lombok.RequiredArgsConstructor;
-import org.spring.customerservice.exeption.PhoneNotPresentException;
 import org.spring.customerservice.exeption.UserNotFoundException;
 import org.spring.customerservice.model.Customer;
 import org.spring.customerservice.repository.CustomerRepository;
@@ -32,30 +31,19 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customerToUpdate = customerRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("Customer with id " + id + " not found"));
 
-        if (customer.getFirstName() != null) {
-            customerToUpdate.setFirstName(customer.getFirstName());
-        }
 
-        if (customer.getLastName() != null) {
-            customerToUpdate.setLastName(customer.getLastName());
-        }
+        customerToUpdate.setFirstName(customer.getFirstName());
+        customerToUpdate.setLastName(customer.getLastName());
+        customerToUpdate.setEmail(customer.getEmail());
+        customerToUpdate.setPhone(customer.getPhone());
 
-        if (customer.getEmail() != null) {
-            customerToUpdate.setEmail(customer.getEmail());
-        }
-
-        if (customer.getPhone() != null) {
-            customerToUpdate.setPhone(customer.getPhone());
-        }
 
         return customerRepository.save(customerToUpdate);
     }
 
     @Override
     public Customer addCustomer(Customer customer) {
-        if (customer.getPhone() == null) {
-            throw new PhoneNotPresentException("Phone not present");
-        }
+
         return customerRepository.save(customer);
     }
 
